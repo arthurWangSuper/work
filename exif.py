@@ -12,6 +12,31 @@ def parse_args():
     parser.add_argument('--output', type=str, default='')
     return parser.parse_args()
 
+def Get_GPS_Info(left_trj_path, right_tri_path, image_name):
+    with open(left_trj_path, 'r') as lf:
+        left_lines = lf.readlines()
+    with open(right_trj_path, 'r') as rf:
+        right_lines = rf.readlines()
+    left_lines = [line.strip('\n') for line in left_lines]
+    left_lines = left_lines[21:]
+    right_lines = [line.strip('\n') for line in right_lines]
+    right_lines = right_lines[21:]
+
+    lines = left_lines
+    lines.append(right_lines)
+	
+    gps_infos = {}
+    for line in lines:
+        sub_str = [x for x in line.split(' ') if x]
+        if(substr[5] == image_name):
+	    gps_info = {
+               "latitude": float(sub_str[3]), 
+               "longitude": float(sub_str[4]), 
+               "altitude": float(sub_str[5]), 
+               "dop": 5.0
+           }
+    return gps_infos
+
 def main(csv_path, image_root, save_root):
     csv_data = open(csv_path, "r")
     reader = csv.reader(csv_data)
