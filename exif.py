@@ -6,9 +6,10 @@ import csv
 import os
 def parse_args():
     parser = argparse.ArgumentParser()
-    parser.add_argument('--left_trj', type=str, default='/data1/yuyong/stereo/stereo_hdmap_20191204_beijing/Cam1.trj')
-    parser.add_argument('--right_trj', type=str, default='/data1/yuyong/stereo/stereo_hdmap_20191204_beijing/Cam2.trj')
-    parser.add_argument('--output', type=str, default='/home/yuyong/git/OpenSfM/data/hd_stereo/exif_overrides.json')
+    parser.add_argument('--input', type=str, default='')
+    parser.add_argument('--left_trj', type=str, default='')
+    parser.add_argument('--right_trj', type=str, default='')
+    parser.add_argument('--output', type=str, default='')
     return parser.parse_args()
 
 def main(csv_path, image_root, save_root):
